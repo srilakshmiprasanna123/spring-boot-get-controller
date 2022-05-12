@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/greeting")
 public class SpringBootController {
 
     @Autowired
@@ -43,6 +44,12 @@ public class SpringBootController {
     @PutMapping("/put/{firstName}")
     public String sayHello(@PathVariable String firstName, @RequestParam(value = "lastName") String lastName){
         return "Hello"+firstName+" "+lastName;
+    }
+
+    @PostMapping("/hi")
+    public String sayPostHello(User user){
+        String newuser = serviceLayer.sayPostHello(user);
+        return newuser;
     }
 }
 
