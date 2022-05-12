@@ -1,14 +1,23 @@
 
 package com.example.springbootget.controller;
 
-import org.apache.catalina.User;
+
+import com.example.springbootget.entity.User;
+import com.example.springbootget.servicelayer.ServiceLayer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SpringBootController {
-    @GetMapping("/hello")
-    public String hello(){
-        return "Hello from Bridgelabz";
+
+    @Autowired
+    ServiceLayer serviceLayer;
+
+    @GetMapping("/")
+    public String sayHello(){
+        String response = serviceLayer.sayHello();
+        return response;
     }
 
     @GetMapping("/web")
@@ -28,7 +37,7 @@ public class SpringBootController {
 
     @PostMapping("/post")
     public String sayHello(@RequestBody User user){
-        return "Hello"+user.getFullName()+" "+user.getUsername();
+        return "Hello"+user.getFirstName()+" "+user.getLastName();
     }
 
     @PutMapping("/put/{firstName}")
